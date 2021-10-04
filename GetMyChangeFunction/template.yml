@@ -8,7 +8,8 @@ Transform: AWS::Serverless-2016-10-31
 Parameters:
   AppId:
     Type: String 
-
+    Default: "changecalc"
+    
 Resources:
 
   # This is a Lambda function config associated with the source code: get-my-change.js
