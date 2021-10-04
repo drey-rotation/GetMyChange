@@ -1,14 +1,12 @@
 # GetMeMyChange
 
-This solution creates a NodeJS Lambda function behind an API Gateway REST API. It uses AWS Serverless Application Model (SAM) to create these resources. 
+This solution Deploys a NodeJS Lambda function behind an API Gateway REST API. It uses AWS Serverless Application Model (SAM) to create the resources. 
 
-In addition, a CI/CD pipeline is used to build, test, and deploy the function using SAM Pipelines (pipeline creation is not part of this repo). 
-
-The solution deploys an AWS EventBridge bus that uses API destinations to communicate the alerts to my configured Slack channel.
+In addition, a CI/CD pipeline is used to build, test, and deploy the REST API using SAM Pipelines (pipeline creation is not part of this repo). 
 
 # The Pipeline
 
-The pipelines are created using SAM pipelines, a new feature of the SAM cli. Resources created here include IAM users, roles, and permissions for each stage. The pipeline uses Git Flow, where each new feature branch becomes it's own pipeline and creates and manages it's own resources. Branches merged into main first go through an integration test phase and if passed the function will be deployed to Production.
+The pipelines are created using SAM pipelines, a new feature of the SAM cli. Resources created here include IAM Users, IAM Roles, and IAM Permissions for services and programatic access to resources at each stage. The pipeline uses Git Flow, where each new feature branch becomes it's own pipeline and creates and manages it's own resources. Branches merged into main first go through a Unit Test phase, and if passed an integration test phase before the function is deployed to Production.
 
 Build -> unit test -> deploy to test -> integration test -> deploy to production
 

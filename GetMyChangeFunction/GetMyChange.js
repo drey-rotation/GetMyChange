@@ -29,7 +29,7 @@ exports.getMeMyChangeHandler = async (event) => {
         if (results.intVal > 0) {
             returnVal += (results.intVal > 1) ? `${results.intVal} ${AvailableCoins[i].pluralText}` : `${results.intVal} ${AvailableCoins[i].singletext}`;
         } else
-            returnVal += `Zero ${AvailableCoins[i].pluralText}`;
+            returnVal += ""; // this means there were 0 items. `Zero ${AvailableCoins[i].pluralText}`;
         returnVal += '\n ';
         amountToMatch = results.remainder;
     }

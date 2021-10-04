@@ -1,0 +1,14 @@
+{
+  "name": "adtchange",
+  "version": "1.0.0",
+  "description": "Call the makechange api in api gateway for code challenge",
+  "main": "MakeChange.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "drew reynaud",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.4"
+  }
+}
