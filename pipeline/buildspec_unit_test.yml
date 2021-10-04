@@ -8,5 +8,6 @@ phases:
       # trigger the unit tests here
       - echo 'Running unit tests'
       - ls -al 
-      # - cd GetMyChangeFunction
-      # - npm run test 
+      - cd GetMyChangeFunction 
+      - npm i
+      - npm run test 
