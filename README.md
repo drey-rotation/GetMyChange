@@ -6,7 +6,11 @@ In addition, a CI/CD pipeline is used to build, test, and deploy the REST API us
 
 # The Pipeline
 
-The pipelines are created using SAM pipelines, a new feature of the SAM cli. Resources created here include IAM Users, IAM Roles, and IAM Permissions for services and programatic access to resources at each stage. The pipeline uses Git Flow, where each new feature branch becomes it's own pipeline and creates and manages it's own resources. Branches merged into main go through this scenario:
+On each commit to this repo, the application (in this case a lambda function that calculates change in dollars) will go through a complete CI/CD pipeline, including unit and integration tests before getting deployed into a production environment.
+
+The pipelines are created using SAM pipelines, a new feature of the SAM cli. The pipelines create all necessary resources on the specified AWS account. 
+
+The pipeline incorporates the Git Flow model, where each new feature branch becomes it's own pipeline and creates and manages it's own resources. Feature branches merged into main branch will go through this scenario:
 
   1. Build: Lambda function is built and any syntax errors will stop deployments.
   2. Unit Test phase: run basic functional testing.
@@ -23,18 +27,9 @@ The initial pipeline stages. CodePipeline has a nice visual interface:
 
   The prod endpoint is https://9qpx4gggp0.execute-api.us-west-2.amazonaws.com/Prod .
 
-# UI Test
-
-There is a front end "UI" in this repo that uses axios to call the REST API: ./FrontEnd. To run the demo application:
-
-  - cd FrontEnd
-  - npm i
-  - node MakeChange TotalCost=1.29 AmountProvided=5.00
- 
-
 # The lambda function
 
-I was asked recently to create  a program to calculate the change from a total amount and an amount given in dollars. When executed it should accept two arguments:
+The Application is a simple lambda function that calculates change based on inputs. The function is located in the GetMyChangeFunction folder. When executed it should accept two arguments:
 
   1) “Total cost” (In USD)
   2) “Amount provided” (also in USD).  
@@ -52,11 +47,6 @@ Return as output the change that should be provided, not in USD, but instead by 
   2 quarters
   2 dimes
   1 penny
-
-{
-  "body": "{ \n    \"TotalCost\": \"7.50\",\n    \"AmountProvided\": \"7.50\"\n}"
-}
-
 
 # Unit Tests
 
@@ -77,16 +67,17 @@ The build templates are completely customizable. Here is the unit testing build 
   - An AWS Account
   - AWS SAM installed locally
 
-# The Lambda Application
+# To Run:
 
-When executed it should accept two arguments:
+There is a front end "UI" in this repo that uses axios to call the REST API: ./FrontEnd. To run the demo application:
 
-  1) “Total cost” (In USD)
-  2) “Amount provided” (also in USD).  
+  - cd FrontEnd
+  - npm i
+  - node MakeChange TotalCost=1.29 AmountProvided=5.00
 
 # Conclusion
 
-If you want more details about how you can create your these pipelines in your own environment let me know.
+If you want more details about how you can create your these pipelines in your own environment let me know. Or happy to answer any questions.
 
 
 
