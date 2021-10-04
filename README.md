@@ -6,11 +6,31 @@ In addition, a CI/CD pipeline is used to build, test, and deploy the REST API us
 
 # The Pipeline
 
-The pipelines are created using SAM pipelines, a new feature of the SAM cli. Resources created here include IAM Users, IAM Roles, and IAM Permissions for services and programatic access to resources at each stage. The pipeline uses Git Flow, where each new feature branch becomes it's own pipeline and creates and manages it's own resources. Branches merged into main first go through a Unit Test phase, and if passed an integration test phase before the function is deployed to Production.
+The pipelines are created using SAM pipelines, a new feature of the SAM cli. Resources created here include IAM Users, IAM Roles, and IAM Permissions for services and programatic access to resources at each stage. The pipeline uses Git Flow, where each new feature branch becomes it's own pipeline and creates and manages it's own resources. Branches merged into main go through this scenario:
 
-Build -> unit test -> deploy to test -> integration test -> deploy to production
+  1. Build: Lambda function is built and any syntax errors will stop deployments.
+  2. Unit Test phase: run basic functional testing.
+  3. Deployment to test environment: Deploys resources. A manual stage can be added here if desired.
+  4. Integration test phase: More testing.
+  5. Deployed to Production if all previous phases complete successfully.
 
-Best practice is to deploy the production and dev branches to different AWS Accounts.
+<br/>
+The initial pipeline stages. CodePipeline has a nice visual interface:
+<br/>
+<img src="./pipeline-img.jpg" width="500" >
+
+<br/>
+
+  The prod endpoint is https://9qpx4gggp0.execute-api.us-west-2.amazonaws.com/Prod .
+
+# UI Test
+
+There is a front end "UI" in this repo that uses axios to call the REST API: ./FrontEnd. To run the demo application:
+
+  - cd FrontEnd
+  - npm i
+  - node MakeChange TotalCost=1.29 AmountProvided=5.00
+ 
 
 # The lambda function
 
@@ -37,48 +57,20 @@ Return as output the change that should be provided, not in USD, but instead by 
   "body": "{ \n    \"TotalCost\": \"7.50\",\n    \"AmountProvided\": \"7.50\"\n}"
 }
 
-1. Creates a CodePipeline Pipeline for building, testing and deploying the GetMeMyChange lambda function
 
-You can clone this repo and deploy the entire infrastructure into your own AWS Account if you like. I can help you with instructions on how to do that if you like.
+# Unit Tests
 
-2. Pushing to this repo triggers the CI/CD pipeline on my personal AWS Account. The pipeline builds one stage for each branch of this repo (currently DEV and PROD). DEV and PROD are on (or can be on) separate accounts and can be assigned different access permissions -- i.e. one group of developers can push to the DEV branch but a separate and smaller group can have permissions to push to PROD. 
-
-This solution will deploy a pipeline with 2 Stages. One stage is deployed to DEV (dev branch) and one stage deployed to Production (main branch). 
-
-Best practice is to use separate AWS accounts for each stage. This demo uses only 1 account.
-
-The template creates all of the user (pipeline user), github access key/secret, buckets, iam rules
-    for demo, DEV and PROD pipelines are both created on the same AWS Account.
-  1. Stage1 DEV:
-  
-
-  2. Stage2 PROD:
+The lambda function contains a few basic Jest unit tests in GetMyChangeFunction/tests/CoinsInAmount.test.js:
 
 
-    - Builds the source code for the lambda function, checks for syntax errors.
-    - Runs the lambda function through basic Unit and Functional tests using jest. If a test fails, a notification is sent to an administrator.
-    - Deploys the function to API Gateway and Lambda.
+<img src="./unit-testing.jpg" width="500" >
 
-  The results can be seen here:
-
-    https://jlkdsfjkldsfjlksdfjkls
+<br/><br/>
 
 
-# EventBus
+The build templates are completely customizable. Here is the unit testing build phase config:
 
-# Slack Integration
-# Tech Stack
-
-  - AWS Codepipeline (CodeBuild, CodeDeploy)
-  - Cloudformation
-  - AWS SAM
-  - API Gateway
-  - Lambda
-  - Jest Unit Testing
-  - Yup validation
-# git flow
-
-  
+<img src="./unit-testing-template.jpg" width="500" >
 
 # Pre-reqs:
 
@@ -92,26 +84,11 @@ When executed it should accept two arguments:
   1) “Total cost” (In USD)
   2) “Amount provided” (also in USD).  
 
+# Conclusion
+
+If you want more details about how you can create your these pipelines in your own environment let me know.
 
 
-  # How to Use
-
-1. Clone the repo
-2. cd src/handlers
-  npm i
-3. sam deploy
-
-2. Make changes to the Lambda function.
-3. Push changes on the  main branch.
-4. Once the build is complete, you should see your changes reflected here:
-
-  https://jlfsdajklsfajklfsdjlkfsad
-  
-
-
-To deploy this template and connect to the main git branch, run this against the leading account:
-
-sam deploy -t codepipeline.yaml --stack-name <stack-name> --capabilities=CAPABILITY_IAM --profile <YOUR-AWS-PROFILE-CREDENTIALS>
 
 
 
