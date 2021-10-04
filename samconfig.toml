@@ -1,0 +1,12 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "change-calc"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-c2u1m4gu4u2c"
+s3_prefix = "change-calc"
+region = "us-west-2"
+profile = "rotation_infrastructure"
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "AppId=\"changecalc\""
+image_repositories = []
