@@ -35,7 +35,7 @@ describe('Test the Dollar calculation of HowManyCoinsInAmount', () => {
       amountToMatch = results.remainder;
     }
 
-    console.log(returnVal);
+    console.log("Returning: ", returnVal);
     // expect(results.intVal).toEqual(1);
     // expect(results.remainder).toEqual(90);
 

@@ -10,11 +10,11 @@ const AvailableCoins = [
     { amount: 10, singletext: "dime", pluralText: "dimes" },
     { amount: 1, singletext: "penny", pluralText: "pennies" },
 ];
-const dollars = 0, quarters = 1, dimes = 2, pennies = 3;
+const dollars = 0, 
+    quarters = 1, dimes = 2, pennies = 3;
 
 
 exports.getMeMyChangeHandler = async (event) => {
-
     const input = JSON.parse(event.body);
     // convert everything to pennies
     const costDifference = (input.AmountProvided * 100) - (input.TotalCost * 100);

@@ -109,3 +109,12 @@ When executed it should accept two arguments:
 
   https://jlfsdajklsfajklfsdjlkfsad
   
+
+
+To deploy this template and connect to the main git branch, run this against the leading account:
+
+sam deploy -t codepipeline.yaml --stack-name <stack-name> --capabilities=CAPABILITY_IAM --profile <YOUR-AWS-PROFILE-CREDENTIALS>
+
+
+
+
