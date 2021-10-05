@@ -57,7 +57,6 @@ The lambda function contains a few basic Jest unit tests in GetMyChangeFunction/
 
 <br/><br/>
 
-
 The build templates are completely customizable. Here is the unit testing build phase config:
 
 <img src="./unit-testing-template.jpg" width="500" >
