@@ -1,15 +1,14 @@
 # This is the SAM template for the GetMeMyChange App
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
-  GetMeMyChange Demo Application. Api Gateway, Lambda function.
+  GetMeMyChange Demo Application.
   Given a TotalAmountReceived and TotalCost as dollar inputs, determine the correct change in pre-set denominatins.
 Transform: AWS::Serverless-2016-10-31
 
 Parameters:
   AppId:
-    Type: String 
-    Default: "changecalc"
-    
+    Type: String
+
 Resources:
 
   # This is a Lambda function config associated with the source code: get-my-change.js
@@ -18,7 +17,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
-      Handler: GetMyChange.getMeMyChangeHandler
+      Handler: GetMyChangeFunction/GetMyChange.getMeMyChangeHandler
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 60
@@ -31,3 +30,7 @@ Resources:
             Path: /
             Method: POST
 
+Outputs:
+  apigatewayendpoiint:
+    Description: The Arn the api gateway api.
+    Value: !Sub "https://${getMeMyChangeFunction}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

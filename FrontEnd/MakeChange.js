@@ -9,7 +9,7 @@ var myArgs = process.argv.slice(2);
 const validated = validateArgs(myArgs);
 console.log(validated);
 /** make the call */
-axios.post('https://9qpx4gggp0.execute-api.us-west-2.amazonaws.com/Prod', {
+axios.post('https://wbgwt5vkp3.execute-api.us-west-2.amazonaws.com/Prod', {
   TotalCost: validated.TotalCost,
   AmountProvided: validated.AmountProvided
 })
