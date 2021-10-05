@@ -27,6 +27,21 @@ The initial pipeline stages. CodePipeline has a nice visual interface:
 
   The prod endpoint is https://9qpx4gggp0.execute-api.us-west-2.amazonaws.com/Prod .
 
+## Creating feature branches
+
+Creating feature branches requires some manual effort. This is a good thing because this operation will create resources on your AWS account. If you have the right credentials:
+
+```
+  - git branch -b feature-number1
+  - git push origin feature-number1
+  - sam deploy -t codepipeline.yaml --stack-name feature-number1-pipeline --capabilities=CAPABILITY_IAM \    --parameter-overrides="FeatureGitBranch=feature-number1"
+
+  <YOUR-FEATURE-NAME> should begin with the word "feature-" i.e. feature-number1.
+```
+
+
+
+Once the pipeline runs for the first time you can retrieve your dev and prod URLS from the console.
 # The lambda function
 
 The Application is a simple lambda function that calculates change based on inputs. The function is located in the GetMyChangeFunction folder. When executed it should accept two arguments:
