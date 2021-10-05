@@ -17,7 +17,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
-      Handler: GetMyChange.getMeMyChangeHandler
+      Handler: GetMyChangeFunction/GetMyChange.getMeMyChangeHandler
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 60
