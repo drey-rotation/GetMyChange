@@ -34,9 +34,9 @@ Creating feature branches requires some manual effort. This is a good thing beca
 ```
   - git branch -b feature-number1
   - git push origin feature-number1
-  - sam deploy -t codepipeline.yaml --stack-name feature-number1-pipeline --capabilities=CAPABILITY_IAM \    --parameter-overrides="FeatureGitBranch=feature-number1"
+  - sam deploy -t codepipeline.yaml --stack-name feature-test1-pipeline --capabilities=CAPABILITY_IAM \    --parameter-overrides="FeatureGitBranch=feature-test1"
 
-  <YOUR-FEATURE-NAME> should begin with the word "feature-" i.e. feature-number1.
+  <YOUR-FEATURE-NAME> should begin with the word "feature-" i.e. feature-test1.
 ```
 
 
