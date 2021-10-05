@@ -17,7 +17,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
-      Handler: GetMyChange.getMeMyChangeHandler
+      Handler: GetMyChangeFunction/GetMyChange.getMeMyChangeHandler
       Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 60
@@ -30,3 +30,7 @@ Resources:
             Path: /
             Method: POST
 
+Outputs:
+  apigatewayendpoiint:
+    Description: The Arn the api gateway api.
+    Value: !Sub "https://${getMeMyChangeFunction}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
