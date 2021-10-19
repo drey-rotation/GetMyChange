@@ -8,6 +8,7 @@ const AvailableCoins = [
     { amount: 100, singletext: "$1 bill", pluralText: "$1 bills" },
     { amount: 25, singletext: "quarter", pluralText: "quarters" },
     { amount: 10, singletext: "dime", pluralText: "dimes" },
+    { amount: 5, singletext: "nickel", pluralText: "nickels" },
     { amount: 1, singletext: "penny", pluralText: "pennies" },
 ];
 const dollars = 0, 
