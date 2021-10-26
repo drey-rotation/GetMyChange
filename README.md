@@ -12,12 +12,18 @@ The pipelines are created using SAM pipelines, a new feature of the SAM cli. The
 
 To deploy this template and connect to the main git branch, run this against the leading account:
  `sam deploy -t codepipeline.yaml --stack-name <stack-name> --capabilities=CAPABILITY_IAM`.
- After creating the stack, the CodeStar Connection is in PENDING status by default. You must complete
- the OAuth handshake with the third-party provider using the installation associated with your connection.
+ After creating the stack, the CodeStar Connection is in PENDING status by default. You must complete the OAuth handshake with the third-party provider using the installation associated with your connection.
 
+If later you need to deploy a new CodePipeline to connect to a non-main git branch, run
+ ```
+ sam deploy -t codepipeline.yaml --stack-name <stack-name> --capabilities=CAPABILITY_IAM \
+   --parameter-overrides="FeatureGitBranch=<branch-name> CodeStarConnectionArn=<codestar-connection-arn>"
+ ```
 
- If you're just creating the main branch, remove the FeatureGitBranch from the parameter-overrides.
- 
+If you're just creating the main branch, remove the FeatureGitBranch from the parameter-overrides.
+
+Note that you may have to create a bucket on your AWS S3 account. The default bucket name is aws-sam-cli-managed-dev-pipeline-artifactsbucket-<Your-AWS-AccountId>
+
 The pipeline incorporates the Git Flow model, where each new feature branch becomes it's own pipeline and creates and manages it's own resources. Feature branches merged into main branch will go through this scenario:
 
   1. Build: Lambda function is built and any syntax errors will stop deployments.
