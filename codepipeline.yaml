@@ -10,8 +10,6 @@ Description: >
   - DeployTest (MainGitBranch only)
   - DeployProd (MainGitBranch only)
 
-  **WARNING** You will be billed for the AWS resources used if you create a stack from this template.
-
 
 # To deploy this template and connect to the main git branch, run this against the leading account:
 # `sam deploy -t codepipeline.yaml --stack-name <stack-name> --capabilities=CAPABILITY_IAM`.
@@ -47,13 +45,13 @@ Parameters:
     Default: "development-stack"
   TestingPipelineExecutionRole:
     Type: String
-    Default: "arn:aws:iam::897907855877:role/aws-sam-cli-managed-dev-pipe-PipelineExecutionRole-11EQ5MV0MBZCX"
+    Default: "arn:aws:iam::${AWS::AccountId}:role/aws-sam-cli-managed-dev-pipe-PipelineExecutionRole-11EQ5MV0MBZCX"
   TestingCloudFormationExecutionRole:
     Type: String
-    Default: "arn:aws:iam::897907855877:role/aws-sam-cli-managed-dev-p-CloudFormationExecutionR-W6ZM6LY9K14A"
+    Default: "arn:aws:iam::${AWS::AccountId}:role/aws-sam-cli-managed-dev-p-CloudFormationExecutionR-W6ZM6LY9K14A"
   TestingArtifactBucket:
     Type: String
-    Default: "aws-sam-cli-managed-dev-pipeline-artifactsbucket-ykyyfi4okzxx"
+    Default: "aws-sam-cli-managed-dev-pipeline-artifactsbucket-${AWS::AccountId}"
   TestingImageRepository:
     Type: String
     # If there are functions with "Image" PackageType in your template,
@@ -68,10 +66,10 @@ Parameters:
     Default: "production-stack"
   ProdPipelineExecutionRole:
     Type: String
-    Default: "arn:aws:iam::897907855877:role/aws-sam-cli-managed-prod-pip-PipelineExecutionRole-1DGXKFYJ143GU"
+    Default: "arn:aws:iam::${AWS::AccountId}:role/aws-sam-cli-managed-prod-pip-PipelineExecutionRole-1DGXKFYJ143GU"
   ProdCloudFormationExecutionExeRole:
     Type: String
-    Default: "arn:aws:iam::897907855877:role/aws-sam-cli-managed-prod-CloudFormationExecutionR-10E37070AS9SL"
+    Default: "arn:aws:iam::${AWS::AccountId}:role/aws-sam-cli-managed-prod-CloudFormationExecutionR-10E37070AS9SL"
   ProdArtifactBucket:
     Type: String
     Default: "aws-sam-cli-managed-prod-pipeline-artifactsbucket-1uz4a7tp85jsy"

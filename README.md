@@ -10,6 +10,14 @@ On each commit to this repo, the application (in this case a lambda function tha
 
 The pipelines are created using SAM pipelines, a new feature of the SAM cli. The pipelines create all necessary resources on the specified AWS account. 
 
+To deploy this template and connect to the main git branch, run this against the leading account:
+ `sam deploy -t codepipeline.yaml --stack-name <stack-name> --capabilities=CAPABILITY_IAM`.
+ After creating the stack, the CodeStar Connection is in PENDING status by default. You must complete
+ the OAuth handshake with the third-party provider using the installation associated with your connection.
+
+
+ If you're just creating the main branch, remove the FeatureGitBranch from the parameter-overrides.
+ 
 The pipeline incorporates the Git Flow model, where each new feature branch becomes it's own pipeline and creates and manages it's own resources. Feature branches merged into main branch will go through this scenario:
 
   1. Build: Lambda function is built and any syntax errors will stop deployments.
@@ -38,7 +46,6 @@ Creating feature branches requires some manual effort. This is a good thing beca
 
   <YOUR-FEATURE-NAME> should begin with the word "feature-" i.e. feature-test1.
 ```
-
 
 
 Once the pipeline runs for the first time you can retrieve your dev and prod URLS from the console.
